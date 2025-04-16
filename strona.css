@@ -8,7 +8,7 @@
 /* Body and background image */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background-image: url('gwiazdki.jpg');
+  background-image: url('./gwiazdki.jpg');
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
@@ -49,6 +49,7 @@ body {
   object-fit: cover;
   border-radius: 5px;
   transition: opacity 0.3s ease;
+border: 2px solid red; /* TEMP for visibility */
 }
 
 
