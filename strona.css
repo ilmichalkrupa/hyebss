@@ -1,0 +1,94 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and background image */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-image: url('gwiazdki.jpg');
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #000;
+  min-height: 100vh;
+  padding: 12px;
+}
+
+/* Grid container for the magazines */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px; /* space between items */
+  width: 100%;
+  max-width: 1200px; /* Limit the grid width */
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Individual magazine item */
+.magazine {
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.magazine h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+/* Images inside the magazines */
+.magazine img {
+  width: 70%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  transition: opacity 0.3s ease;
+}
+
+
+/* Optional: Add some space between grid items */
+.grid {
+  padding-bottom: 40px; /* Space below the grid */
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* Show 2 columns instead of 3 */
+  }
+
+  .magazine img {
+    max-height: 300px; /* Reduce image size on smaller screens */
+  }
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+    background-size: cover;
+    background-attachment: scroll;
+}
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr; /* Stack items in 1 column for small screens */
+  }
+
+  .magazine h2 {
+    font-size: 24px; /* Make captions smaller */
+  }
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+    background-size: cover;
+    background-attachment: scroll;
+}
+}
