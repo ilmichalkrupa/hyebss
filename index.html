@@ -72,6 +72,7 @@
 
                 const img = document.createElement('img');
                 img.src = `images/${fileName}`;
+		img.loading = "lazy";
                 img.alt = `Page ${i}`;
 
                 a.appendChild(img);
