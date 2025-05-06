@@ -20,7 +20,7 @@ body {
 /* Grid container for the magazines */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
   gap: 20px; /* space between items */
   width: 100%;
   max-width: 1200px; /* Limit the grid width */
