@@ -5,27 +5,31 @@
   box-sizing: border-box;
 }
 
-/* Body and background image */
+/* Base body styles */
 body {
   font-family: Helvetica, Arial, sans-serif;
   background-image: url('./gwiazdki.jpg');
   background-position: center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed; /* Works well on desktop */
   color: #000;
   min-height: 100vh;
   padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 /* Grid container for the magazines */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
-  gap: 20px; /* space between items */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   width: 100%;
-  max-width: 1200px; /* Limit the grid width */
-  margin: 0 auto;
-  text-align: center;
+  max-width: 1200px;
+  padding-bottom: 40px;
 }
 
 /* Individual magazine item */
@@ -44,51 +48,46 @@ body {
 
 /* Images inside the magazines */
 .magazine img {
-  width: 70%;
+  width: 85%;
   height: auto;
   object-fit: cover;
   border-radius: 5px;
   transition: opacity 0.3s ease;
 }
 
+/* --- Responsive Fixes --- */
 
-/* Optional: Add some space between grid items */
-.grid {
-  padding-bottom: 40px; /* Space below the grid */
-}
-
+/* --- MOBILE FIXES --- */
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* Prevent buggy parallax on mobile */
+    background-size: contain;      /* Fit image inside screen */
+    background-repeat: repeat;     /* Let it repeat if needed */
+    background-position: top center;
+  }
+
   .grid {
-    grid-template-columns: repeat(2, 1fr); /* Show 2 columns instead of 3 */
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .magazine img {
-    max-height: 300px; /* Reduce image size on smaller screens */
+    max-height: 400px;
   }
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-    background-size: cover;
-    background-attachment: scroll;
-}
 }
 
 @media (max-width: 480px) {
   .grid {
-    grid-template-columns: 1fr; /* Stack items in 1 column for small screens */
+    grid-template-columns: 1fr;
   }
 
   .magazine h2 {
-    font-size: 24px; /* Make captions smaller */
+    font-size: 24px;
   }
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-    background-size: cover;
+
+  body {
+    background-size: contain;
+    background-position: top center;
+    background-repeat: repeat;
     background-attachment: scroll;
-}
+  }
 }
