@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gazeta - haveyoueverbeensunscreened</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+</head>
+<body class="gallery-body">
+    
+    <div id="magazines-grid" class="grid">
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const magazines = [
+            { name: "Warszawa", prefix: "Warszawa", count: 24 },
+            { name: "Creep", prefix: "sunscreen2", count: 32 },
+            { name: "Krem do opalania", prefix: "sunscreen3", count: 44 },
+            { name: "Prezydenci", prefix: "sunscreen4", count: 44 }
+        ];
+
+        const grid = document.getElementById('magazines-grid');
+
+        function renderCoverList() {
+            grid.innerHTML = '';
+            // Resetujemy klasę do głównego widoku okładek
+            grid.className = 'grid'; 
+            
+            magazines.forEach((mag, index) => {
+                const div = document.createElement('div');
+                div.className = 'magazine';
+                div.onclick = () => openMagazine(index);
+                div.innerHTML = `
+                    <h2>${mag.name}</h2>
+                    <img src="images/${mag.prefix}.1.jpeg" loading="lazy">
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        function openMagazine(index) {
+            const mag = magazines[index];
+            grid.innerHTML = ''; 
+            grid.className = 'magazine-detail-view'; // Nowa klasa dla widoku wnętrza
+
+            // 1. Dodajemy nagłówek z przyciskiem
+            const header = document.createElement('div');
+            header.className = 'back-button-container';
+            header.innerHTML = `
+                <button onclick="renderCoverList()">← POWRÓT DO GAZET</button>
+                <h2 class="magazine-title">${mag.name}</h2>
+            `;
+            grid.appendChild(header);
+
+            // 2. Dodajemy kontener na kafelki stron
+            const pagesGrid = document.createElement('div');
+            pagesGrid.className = 'pages-tile-grid';
+
+            for (let i = 1; i <= mag.count; i++) {
+                const fileName = `${mag.prefix}.${i}.jpeg`;
+                const a = document.createElement('a');
+                a.href = `images/${fileName}`;
+                a.className = 'glightbox';
+                a.dataset.gallery = `mag${index}`;
+
+                const img = document.createElement('img');
+                img.src = `images/${fileName}`;
+                img.loading = "lazy";
+
+                a.appendChild(img);
+                pagesGrid.appendChild(a);
+            }
+            grid.appendChild(pagesGrid);
+            
+            // Inicjalizacja Lightboxa dla nowych kafelków
+            GLightbox({ selector: '.glightbox' });
+        }
+
+        // Start strony
+        renderCoverList();
+    </script>
+</body>
+</html>

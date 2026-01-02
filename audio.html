@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio - haveyoueverbeensunscreened</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="gallery-body">
+
+    <div class="magazine-detail-view">
+        <div class="back-button-container">
+            <button onclick="window.close();">← POWRÓT</button>
+            <h2 class="magazine-title">NAGRANIA AUDIO</h2>
+        </div>
+
+        <div id="audio-list-container" class="audio-list">
+            </div>
+    </div>
+
+    <script>
+        // TUTAJ DODAJ SWOJE UTWORY
+        // Nazwa (title) i nazwa pliku (file), który musi być w folderze /audio/
+        const tracks = [
+            { title: "tereny dla kremu do opalania", file: "track1.mp3" },
+            { title: "najlepszy dj set all time", file: "track2.mp3" },
+            { title: "premiera ss3 vinyl set", file: "track3.mp3" },
+            { title: "salto bar vinyl dj set 10.2025", file: "track4.mp3" }
+        ];
+
+        const container = document.getElementById('audio-list-container');
+
+        tracks.forEach(track => {
+            const audioItem = document.createElement('div');
+            audioItem.className = 'audio-item';
+
+            audioItem.innerHTML = `
+                <p class="audio-track-title">${track.title}</p>
+                <audio controls src="audio/${track.file}">
+                    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+                </audio>
+            `;
+
+            container.appendChild(audioItem);
+        });
+    </script>
+</body>
+</html>

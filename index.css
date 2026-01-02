@@ -1,93 +1,190 @@
-/* General Reset */
+/* --- RESET I PODSTAWA --- */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Base body styles */
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  background-image: url('./gwiazdki.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed; /* Works well on desktop */
-  color: #000;
-  min-height: 100vh;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    background-image: url('gwiazdki.jpg'); 
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #000;
+    min-height: 100vh;
 }
 
-/* Grid container for the magazines */
+/* --- STRONA GŁÓWNA (index.html) --- */
+.main-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.main-title {
+    font-size: clamp(40px, 10vw, 100px);
+    margin-bottom: 60px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 80px; 
+}
+
+.text-link {
+    font-size: clamp(30px, 6vw, 70px);
+    color: #000;
+    text-decoration: none;
+    border-bottom: 8px solid #000; 
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    /* Brak transition i efektów hover zgodnie z prośbą */
+}
+
+/* --- WIDOK OKŁADEK (gazeta.html - lista 4 gazet) --- */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-  padding-bottom: 40px;
+    display: grid;
+    /* Wymuszamy 4 kolumny obok siebie */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    max-width: 95%;
+    margin: 40px auto;
+    text-align: center;
 }
 
-/* Individual magazine item */
 .magazine {
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 10px;
-  background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .magazine h2 {
-  font-size: 40px;
-  margin-bottom: 10px;
-  color: #000;
+    font-size: clamp(14px, 2vw, 24px);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-/* Images inside the magazines */
 .magazine img {
-  width: 85%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 5px;
-  transition: opacity 0.3s ease;
+    width: 100%;
+    height: auto;
+    border: 2px solid #000;
+    cursor: pointer;
+    display: block;
 }
 
-/* --- Responsive Fixes --- */
+/* --- WIDOK KAFELKÓW (Wnętrze wybranej gazety) --- */
+.magazine-detail-view {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
 
-/* --- MOBILE FIXES --- */
+.back-button-container {
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.back-button-container button {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    text-transform: uppercase;
+}
+
+.magazine-title {
+    margin-top: 20px;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.pages-tile-grid {
+    display: grid;
+    /* Kafelki stron obok siebie, dopasowują się do ekranu */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    width: 100%;
+}
+
+.pages-tile-grid a {
+    display: block;
+    line-height: 0;
+}
+
+.pages-tile-grid img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #000;
+    display: block;
+}
+
+/* --- RESPONSYWNOŚĆ (Ekrany mobilne) --- */
 @media (max-width: 768px) {
-  body {
-    background-attachment: scroll; /* Prevent buggy parallax on mobile */
-    background-size: contain;      /* Fit image inside screen */
-    background-repeat: repeat;     /* Let it repeat if needed */
-    background-position: top center;
-  }
+    /* Strona główna: linki jeden pod drugim */
+    .nav-links {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .text-link {
+        font-size: 50px;
+        border-bottom-width: 5px;
+    }
 
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    /* Gazety: 2 rzędy po 2 zamiast 4 obok siebie */
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-  .magazine img {
-    max-height: 400px;
-  }
+    /* Kafelki stron: nieco mniejsze na telefonie */
+    .pages-tile-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
 }
 
-@media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+/* --- STYLE DLA AUDIO.HTML --- */
 
-  .magazine h2 {
-    font-size: 24px;
-  }
+.audio-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 50px;
+}
 
-  body {
-    background-size: contain;
-    background-position: top center;
-    background-repeat: repeat;
-    background-attachment: scroll;
-  }
+.audio-item {
+    width: 100%;
+    max-width: 500px; /* Szerokość paska odtwarzania */
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1); /* Bardzo delikatne tło pod odtwarzaczem */
+    padding: 20px;
+    border: 1px solid #000;
+}
+
+.audio-track-title {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+audio {
+    width: 100%; /* Pasek zajmuje całą szerokość ramki */
+    height: 40px;
 }
