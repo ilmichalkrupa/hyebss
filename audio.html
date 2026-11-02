@@ -3,50 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio - haveyoueverbeensunscreened</title>
+    <title>Audio – haveyoueverbeensunscreened</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
     <link rel="stylesheet" href="index.css">
 </head>
 <body class="gallery-body">
-
-    <div class="magazine-detail-view">
+    <main class="magazine-detail-view">
         <div class="back-button-container">
-            <button onclick="window.close();">← POWRÓT</button>
-            <h2 class="magazine-title">NAGRANIA AUDIO</h2>
+            <a href="index.html" class="back-button">← Powrót</a>
+            <h1 class="magazine-title">Nagrania audio</h1>
         </div>
 
-        <div id="audio-list-container" class="audio-list">
-            </div>
-    </div>
+        <div id="audio-list-container" class="audio-list" aria-live="polite">
+            <p class="status-msg">Wczytywanie listy nagrań…</p>
+        </div>
+    </main>
 
-    <script>
-        // TUTAJ DODAJ SWOJE UTWORY
-        // Nazwa (title) i nazwa pliku (file), który musi być w folderze /audio/
-        const tracks = [
-            { title: "The Hellp 10.3.2026", file: "track4.mp3" },
-            { title: "Neubloom 21.03.2026", file: "track5.mp3" },
-            { title: "Ephemera 2025 cz. 1", file: "track6.mp3" },
-            { title: "Ephemera 2025 cz. 2", file: "track7.mp3" },
-            { title: "Godspeed You, Black Emperor! 5.3.2026", file: "track8.mp3" },
-            { title: "tereny dla kremu do opalania cz 1", file: "track1.mp3" },
-            { title: "tereny dla kremu do opalania cz 2", file: "track2.mp3" },
-            { title: "tereny dla kremu do opalania cz 3", file: "track3.mp3" },
-        ];
-
-        const container = document.getElementById('audio-list-container');
-
-        tracks.forEach(track => {
-            const audioItem = document.createElement('div');
-            audioItem.className = 'audio-item';
-
-            audioItem.innerHTML = `
-                <p class="audio-track-title">${track.title}</p>
-                <audio controls src="audio/${track.file}">
-                    Twoja przeglądarka nie obsługuje odtwarzacza audio.
-                </audio>
-            `;
-
-            container.appendChild(audioItem);
-        });
-    </script>
+    <script src="js/audio.js" defer></script>
 </body>
 </html>

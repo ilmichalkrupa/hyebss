@@ -1,0 +1,20 @@
+# Nagłówki dla Cloudflare Pages (na GitHub Pages ten plik jest ignorowany)
+# Jeśli adres R2 będzie inny niż audio.haveyoueverbeensunscreened.com – popraw media-src.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https://audio.haveyoueverbeensunscreened.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'
+
+/images/*
+  Cache-Control: public, max-age=2592000
+
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/bg.webp
+  Cache-Control: public, max-age=2592000
+
+/tracks.json
+  Cache-Control: no-cache

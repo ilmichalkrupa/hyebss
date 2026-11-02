@@ -1,0 +1,13 @@
+{
+  "base": "audio/",
+  "tracks": [
+    { "title": "The Hellp 10.3.2026", "file": "track4.mp3" },
+    { "title": "Neubloom 21.03.2026", "file": "track5.mp3" },
+    { "title": "Ephemera 2025 cz. 1", "file": "track6.mp3" },
+    { "title": "Ephemera 2025 cz. 2", "file": "track7.mp3" },
+    { "title": "Godspeed You, Black Emperor! 5.3.2026", "file": "track8.mp3" },
+    { "title": "tereny dla kremu do opalania cz 1", "file": "track1.mp3" },
+    { "title": "tereny dla kremu do opalania cz 2", "file": "track2.mp3" },
+    { "title": "tereny dla kremu do opalania cz 3", "file": "track3.mp3" }
+  ]
+}

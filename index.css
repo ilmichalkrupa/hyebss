@@ -1,89 +1,146 @@
 /* --- RESET I PODSTAWA --- */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     font-family: Helvetica, Arial, sans-serif;
-    background-image: url('gwiazdki.jpg'); 
-    background-position: center;
-    background-repeat: repeat;
-    background-size: cover;
-    background-attachment: fixed;
     color: #000;
+    background-color: #fff;
     min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+}
+
+/* Tło w osobnej, nieruchomej warstwie – działa też na iOS
+   (background-attachment: fixed jest tam ignorowane) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: #fff url('bg.webp') center / cover no-repeat;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 4px;
 }
 
 /* --- STRONA GŁÓWNA (index.html) --- */
 .main-container {
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 24px 16px;
 }
 
 .main-title {
-    font-size: clamp(40px, 10vw, 100px);
-    margin-bottom: 60px;
+    /* Długi tytuł bez spacji: ograniczony rozmiar + dzielenie w miejscach &shy; */
+    font-size: clamp(30px, 5.6vw, 100px);
+    line-height: 1.05;
+    margin-bottom: clamp(32px, 6vh, 60px);
     font-weight: 900;
-    letter-spacing: -2px;
+    letter-spacing: -0.02em;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    hyphens: manual;
 }
 
 .nav-links {
     display: flex;
     justify-content: center;
-    gap: 80px; 
+    flex-wrap: wrap;
+    gap: clamp(32px, 8vw, 80px);
 }
 
 .text-link {
-    font-size: clamp(30px, 6vw, 70px);
+    font-size: clamp(36px, 6vw, 70px);
     color: #000;
     text-decoration: none;
-    border-bottom: 8px solid #000; 
+    border-bottom: 8px solid #000;
     font-weight: bold;
     text-transform: uppercase;
     padding-bottom: 5px;
-    /* Brak transition i efektów hover zgodnie z prośbą */
 }
 
-/* --- WIDOK OKŁADEK (gazeta.html - lista 4 gazet) --- */
+/* --- PRZYCISK POWROTU (link wyglądający jak przycisk) --- */
+.back-button-container {
+    padding: 20px 0;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.back-button {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+/* --- WIDOK OKŁADEK (gazeta.html) --- */
 .grid {
     display: grid;
-    /* Wymuszamy 4 kolumny obok siebie */
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     max-width: 95%;
-    margin: 40px auto;
+    margin: 20px auto 40px;
     text-align: center;
+}
+
+.grid-header {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
 }
 
 .magazine {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #000;
+    text-decoration: none;
 }
 
 .magazine h2 {
     font-size: clamp(14px, 2vw, 24px);
+    line-height: 1.15;
     margin-bottom: 15px;
     text-transform: uppercase;
-    white-space: nowrap;
+    min-height: 2.3em;              /* okładki w jednym rzędzie startują równo */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .magazine img {
     width: 100%;
-    height: auto;
     border: 2px solid #000;
-    cursor: pointer;
-    display: block;
+    background: #fff;
 }
 
-/* --- WIDOK KAFELKÓW (Wnętrze wybranej gazety) --- */
+/* --- WNĘTRZE GAZETY --- */
 .magazine-detail-view {
     max-width: 1400px;
     margin: 0 auto;
@@ -91,32 +148,16 @@ body {
     text-align: center;
 }
 
-.back-button-container {
-    padding: 20px 0;
-    margin-bottom: 30px;
-}
-
-.back-button-container button {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: inherit;
-    text-transform: uppercase;
-}
-
 .magazine-title {
     margin-top: 20px;
-    font-size: 40px;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.1;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    overflow-wrap: anywhere;
 }
 
 .pages-tile-grid {
     display: grid;
-    /* Kafelki stron obok siebie, dopasowują się do ekranu */
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
     width: 100%;
@@ -129,37 +170,11 @@ body {
 
 .pages-tile-grid img {
     width: 100%;
-    height: auto;
     border: 1px solid #000;
-    display: block;
+    background: #fff;
 }
 
-/* --- RESPONSYWNOŚĆ (Ekrany mobilne) --- */
-@media (max-width: 768px) {
-    /* Strona główna: linki jeden pod drugim */
-    .nav-links {
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    .text-link {
-        font-size: 50px;
-        border-bottom-width: 5px;
-    }
-
-    /* Gazety: 2 rzędy po 2 zamiast 4 obok siebie */
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Kafelki stron: nieco mniejsze na telefonie */
-    .pages-tile-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    }
-}
-
-/* --- STYLE DLA AUDIO.HTML --- */
-
+/* --- AUDIO --- */
 .audio-list {
     display: flex;
     flex-direction: column;
@@ -170,9 +185,9 @@ body {
 
 .audio-item {
     width: 100%;
-    max-width: 500px; /* Szerokość paska odtwarzania */
+    max-width: 560px;
     text-align: left;
-    background: rgba(255, 255, 255, 0.1); /* Bardzo delikatne tło pod odtwarzaczem */
+    background: rgba(255, 255, 255, 0.6);
     padding: 20px;
     border: 1px solid #000;
 }
@@ -180,11 +195,65 @@ body {
 .audio-track-title {
     font-weight: bold;
     font-size: 18px;
+    line-height: 1.25;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
 }
 
 audio {
-    width: 100%; /* Pasek zajmuje całą szerokość ramki */
-    height: 40px;
+    display: block;
+    width: 100%;
+    height: 44px;
+}
+
+.audio-error,
+.status-msg {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* --- TELEFONY I MAŁE TABLETY --- */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-link {
+        border-bottom-width: 5px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .magazine h2 {
+        font-size: 15px;
+    }
+
+    .magazine-detail-view {
+        padding: 12px;
+    }
+
+    .pages-tile-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .audio-item {
+        padding: 14px;
+    }
+
+    .audio-track-title {
+        font-size: 16px;
+    }
+}
+
+/* --- BARDZO WĄSKIE EKRANY (np. iPhone SE) --- */
+@media (max-width: 360px) {
+    .pages-tile-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
